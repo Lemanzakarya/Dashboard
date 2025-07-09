@@ -3,7 +3,13 @@ import { useNotificationStore } from "../store/NotificationStore";
 import { useState, useEffect, useRef } from "react";
 
 export default function NotificationBell() {
-  const { notifications, unreadCount, markAllRead, markOneRead, markOneUnread } = useNotificationStore();
+  const {
+    notifications,
+    unreadCount,
+    markAllRead,
+    markOneRead,
+    markOneUnread,
+  } = useNotificationStore();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -23,9 +29,9 @@ export default function NotificationBell() {
   }, []);
 
   const formatTime = (timestamp) => {
-    return new Date(timestamp).toLocaleTimeString('tr-TR', {
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(timestamp).toLocaleTimeString("tr-TR", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -41,8 +47,8 @@ export default function NotificationBell() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button 
-        onClick={toggleOpen} 
+      <button
+        onClick={toggleOpen}
         className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
       >
         <Bell className="h-5 w-5 text-gray-600 dark:text-gray-300" />
@@ -69,7 +75,7 @@ export default function NotificationBell() {
                   Mark all as read
                 </button>
               )}
-              <button 
+              <button
                 onClick={() => setOpen(false)}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
               >
@@ -77,7 +83,7 @@ export default function NotificationBell() {
               </button>
             </div>
           </div>
-          
+
           <div className="max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-6 text-center text-gray-500 dark:text-gray-400">
@@ -90,29 +96,35 @@ export default function NotificationBell() {
                   <li
                     key={notification.id}
                     className={`relative group hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                      !notification.read 
-                        ? "bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500" 
+                      !notification.read
+                        ? "bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500"
                         : "bg-white dark:bg-gray-800"
                     }`}
                   >
                     <div className="p-4 flex items-start gap-3">
-                      <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                        !notification.read ? "bg-orange-500" : "bg-gray-300 dark:bg-gray-600"
-                      }`} />
-                      
+                      <div
+                        className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                          !notification.read
+                            ? "bg-orange-500"
+                            : "bg-gray-300 dark:bg-gray-600"
+                        }`}
+                      />
+
                       <div className="flex-1 min-w-0">
-                        <p className={`text-sm ${
-                          !notification.read 
-                            ? "font-semibold text-gray-900 dark:text-white" 
-                            : "text-gray-500 dark:text-gray-400"
-                        }`}>
+                        <p
+                          className={`text-sm ${
+                            !notification.read
+                              ? "font-semibold text-gray-900 dark:text-white"
+                              : "text-gray-500 dark:text-gray-400"
+                          }`}
+                        >
                           {notification.message}
                         </p>
                         <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                           {formatTime(notification.timestamp)}
                         </p>
                       </div>
-                      
+
                       {/* Action buttons */}
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         {!notification.read ? (
@@ -125,7 +137,9 @@ export default function NotificationBell() {
                           </button>
                         ) : (
                           <button
-                            onClick={(e) => handleMarkUnread(e, notification.id)}
+                            onClick={(e) =>
+                              handleMarkUnread(e, notification.id)
+                            }
                             className="p-1 text-orange-600 hover:bg-orange-100 dark:hover:bg-orange-900/20 rounded transition-colors"
                             title="Mark as unread"
                           >

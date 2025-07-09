@@ -60,15 +60,15 @@ export default function UserListPage() {
             </button>
 
             <button
-              onClick={() => handleSort("Designation")}
+              onClick={() => handleSort("company")}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-                sortField === "Designation"
+                sortField === "company"
                   ? "bg-orange-500 text-white"
                   : "bg-gray-100 dark:bg-gray-700 hover:bg-orange-100 dark:hover:bg-gray-600"
               }`}
             >
               <ArrowUpDown size={14} />
-              Designation {sortField === "Designation" && (sortAsc ? "↑" : "↓")}
+              Designation {sortField === "company" && (sortAsc ? "↑" : "↓")}
             </button>
           </div>
         </div>

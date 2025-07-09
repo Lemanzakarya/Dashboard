@@ -16,17 +16,20 @@ const fakeMessages = [
   "Email notification sent",
   "File upload completed",
   "Account settings updated",
-  "Login attempt detected"
+  "Login attempt detected",
 ];
 
 export default function useFakeNotification() {
-  const addNotification = useNotificationStore((state) => state.addNotification);
+  const addNotification = useNotificationStore(
+    (state) => state.addNotification
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const message = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+      const message =
+        fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
       addNotification(message);
-    }, 15000); 
+    }, 15000);
 
     return () => clearInterval(interval);
   }, [addNotification]);
