@@ -7,7 +7,7 @@ Bu proje, kullanıcı listesinin görüntülenmesi, filtrelenmesi, sıralanması
 1. Bu repoyu klonlayın:
 
    ```bash
-   git clone https://github.com/kullanici-adi/proje-adi.git
+   [git clone https://github.com/Lemanzakarya/Dashboard.git ]
    ```
 2. Gerekli bağımlılıkları yükleyin:
 
