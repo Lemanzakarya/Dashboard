@@ -76,6 +76,8 @@ export const useUsers = () => {
     sortAsc,
     page,
     totalPages: Math.ceil(filtered.length / itemsPerPage),
+    totalUsers: users.length,
+    filteredUsers: filtered.length,
     handleSearch,
     handleSort,
     nextPage,
