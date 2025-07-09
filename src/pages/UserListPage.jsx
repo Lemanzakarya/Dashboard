@@ -17,9 +17,9 @@ export default function UserListPage() {
   } = useUsers();
 
   return (
-    <div className="p-6">
+    <div className="p-2">
       {/* Search and Sort Section */}
-      <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+      <div className="mb-4 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
         <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
           {/* Search */}
           <div className="relative flex-shrink-0">
