@@ -1,12 +1,33 @@
-# React + Vite
+# Dashboard Uygulaması - README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, kullanıcı listesinin görüntülenmesi, filtrelenmesi, sıralanması ve sayfalanması gibi temel yönetim işlemlerinin yapılabildiği bir React tabanlı dashboard uygulamasıdır. Ek olarak, canlı bildirim akışı ve basit bir süreç akış diyagramı da içermektedir. Uygulama Vite, TailwindCSS, Zustand ve React Flow gibi modern teknolojilerle geliştirilmiştir.
 
-Currently, two official plugins are available:
+## Kurulum Adımları
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Bu repoyu klonlayın:
 
-## Expanding the ESLint configuration
+   ```bash
+   git clone https://github.com/kullanici-adi/proje-adi.git
+   ```
+2. Gerekli bağımlılıkları yükleyin:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   ```bash
+   npm install
+   ```
+3. Projeyi başlatın:
+
+   ```bash
+   npm run dev
+   ```
+
+## Kullanılan Kütüphaneler
+
+* **React**: Kullanıcı arayüzü oluşturmak için temel kütüphane.
+* **Vite**: Hızlı geliştirme ortamı.
+* **TailwindCSS**: Hızlı ve özelleştirilebilir stil oluşturma.
+* **Zustand**: Global state yönetimi için basit ve verimli bir alternatif.
+* **React Flow**: Akış şeması ve süreç görselleştirmeleri için.
+
+## Kendi Değerlendirmem
+
+Projede genel olarak kullanıcı listesi bileşeni, filtreleme ve sıralama mantığı kolayca uygulanabilir oldu. Özellikle Zustand kullanımı sayesinde global state yönetimi sade ve okunabilir bir yapıya kavuştu. React Flow ile süreç görselleştirme kısmı başlangıçta biraz karmaşık görünse de, sade bir yapı kurularak dark mode desteğiyle birlikte uyumlu bir sonuç elde edildi. En çok zorlandığım kısım, bildirim sistemini gerçekçi şekilde taklit etmek ve okunmamış-okunmuş mantığını kullanıcı dostu hale getirmekti. Bunun dışında tasarım tarafında dark mode uyumu ve responsivity için birkaç ince ayar yapılması gerekti. Sonuç olarak, istenen tüm özellikleri kapsayan ve okunabilirliği yüksek, fonksiyonel bir dashboard ortaya çıktı.
