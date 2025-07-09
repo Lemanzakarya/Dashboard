@@ -1,8 +1,8 @@
 const UserTable = ({ users }) => {
   return (
-    <div className="bg-white rounded-lg shadow overflow-x-auto">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
       <table className="min-w-full text-sm">
-        <thead className="bg-gray-100 text-gray-700">
+        <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
           <tr>
             <th className="text-left px-6 py-3">Name</th>
             <th className="text-left px-6 py-3">Designation</th>
@@ -15,7 +15,7 @@ const UserTable = ({ users }) => {
           {users.map((user) => (
             <tr
               key={user.id}
-              className="border-t hover:bg-orange-50 transition-colors duration-200"
+              className="border-t dark:border-gray-600 hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors duration-200"
             >
               <td className="px-6 py-3 font-medium">
                 {user.firstName} {user.lastName}

@@ -24,18 +24,15 @@ export default function UserListPage() {
           placeholder="Search user..."
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
-          className="px-4 py-2 border rounded w-1/2"
+          className="px-4 py-2 border rounded w-1/2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
         />
-        <div className="flex gap-2">
+        <div>
           <button
             onClick={handleSort}
-            className="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-100"
+            className="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <Filter size={18} />
             {sortAsc ? "A-Z" : "Z-A"}
-          </button>
-          <button className="bg-[#FE7743] text-white px-4 py-2 rounded hover:bg-orange-600">
-            Add User
           </button>
         </div>
       </div>
@@ -48,17 +45,17 @@ export default function UserListPage() {
         <button
           onClick={prevPage}
           disabled={page === 0}
-          className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ChevronLeft />
         </button>
-        <span className="flex items-center px-3 py-2 text-sm text-gray-600">
+        <span className="flex items-center px-3 py-2 text-sm text-gray-600 dark:text-gray-400">
           Page {page + 1} of {totalPages}
         </span>
         <button
           onClick={nextPage}
           disabled={page >= totalPages - 1}
-          className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ChevronRight />
         </button>
