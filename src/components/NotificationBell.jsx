@@ -1,20 +1,16 @@
-import { Bell, X } from "lucide-react";
+import { Bell, X, MailOpen, CheckCheck, Mail } from "lucide-react";
 import { useNotificationStore } from "../store/NotificationStore";
 import { useState, useEffect, useRef } from "react";
 
 export default function NotificationBell() {
-  const { notifications, unreadCount, markAllRead } = useNotificationStore();
+  const { notifications, unreadCount, markAllRead, markOneRead, markOneUnread } = useNotificationStore();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleOpen = () => {
     setOpen(!open);
-    if (!open && unreadCount > 0) {
-      markAllRead();
-    }
   };
 
-  // Dışarı tıklandığında kapat
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,6 +27,16 @@ export default function NotificationBell() {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  const handleMarkRead = (e, id) => {
+    e.stopPropagation();
+    markOneRead(id);
+  };
+
+  const handleMarkUnread = (e, id) => {
+    e.stopPropagation();
+    markOneUnread(id);
   };
 
   return (
@@ -53,12 +59,23 @@ export default function NotificationBell() {
             <h3 className="font-semibold text-gray-900 dark:text-white">
               Notifications
             </h3>
-            <button 
-              onClick={() => setOpen(false)}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-            >
-              <X size={18} />
-            </button>
+            <div className="flex items-center gap-2">
+              {unreadCount > 0 && (
+                <button
+                  onClick={markAllRead}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:underline flex items-center gap-1 hover:text-slate-800 dark:hover:text-slate-200"
+                >
+                  <CheckCheck size={14} />
+                  Mark all as read
+                </button>
+              )}
+              <button 
+                onClick={() => setOpen(false)}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <X size={18} />
+              </button>
+            </div>
           </div>
           
           <div className="max-h-96 overflow-y-auto">
@@ -72,25 +89,49 @@ export default function NotificationBell() {
                 {notifications.map((notification) => (
                   <li
                     key={notification.id}
-                    className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                      !notification.read ? "bg-orange-50 dark:bg-orange-900/20" : ""
+                    className={`relative group hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+                      !notification.read 
+                        ? "bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500" 
+                        : "bg-white dark:bg-gray-800"
                     }`}
                   >
-                    <div className="flex items-start gap-3">
+                    <div className="p-4 flex items-start gap-3">
                       <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                        notification.read ? "bg-gray-300" : "bg-orange-500"
+                        !notification.read ? "bg-orange-500" : "bg-gray-300 dark:bg-gray-600"
                       }`} />
+                      
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm ${
-                          notification.read 
-                            ? "text-gray-600 dark:text-gray-400" 
-                            : "text-gray-900 dark:text-white font-medium"
+                          !notification.read 
+                            ? "font-semibold text-gray-900 dark:text-white" 
+                            : "text-gray-500 dark:text-gray-400"
                         }`}>
                           {notification.message}
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                           {formatTime(notification.timestamp)}
                         </p>
+                      </div>
+                      
+                      {/* Action buttons */}
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {!notification.read ? (
+                          <button
+                            onClick={(e) => handleMarkRead(e, notification.id)}
+                            className="p-1 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700 rounded transition-colors"
+                            title="Mark as read"
+                          >
+                            <MailOpen size={14} />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={(e) => handleMarkUnread(e, notification.id)}
+                            className="p-1 text-orange-600 hover:bg-orange-100 dark:hover:bg-orange-900/20 rounded transition-colors"
+                            title="Mark as unread"
+                          >
+                            <Mail size={14} />
+                          </button>
+                        )}
                       </div>
                     </div>
                   </li>

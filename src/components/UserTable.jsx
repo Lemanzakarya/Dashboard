@@ -2,7 +2,7 @@ const UserTable = ({ users }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
       <table className="min-w-full text-sm">
-        <thead className="bg-[#1E293B] text-white">
+        <thead className="bg-[#1E293B] dark:bg-gray-700 text-white">
           <tr>
             <th className="text-left px-6 py-3 font-medium">Name</th>
             <th className="text-left px-6 py-3 font-medium">Designation</th>

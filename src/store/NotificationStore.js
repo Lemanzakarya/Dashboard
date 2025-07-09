@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export const useNotificationStore = create((set) => ({
   notifications: [],
   unreadCount: 0,
+  
   addNotification: (message) =>
     set((state) => ({
       notifications: [
@@ -11,16 +12,28 @@ export const useNotificationStore = create((set) => ({
       ],
       unreadCount: state.unreadCount + 1,
     })),
+    
   markAllRead: () =>
     set((state) => ({
       notifications: state.notifications.map((n) => ({ ...n, read: true })),
       unreadCount: 0,
     })),
-  markAsRead: (id) =>
-    set((state) => ({
-      notifications: state.notifications.map((n) =>
+    
+  markOneRead: (id) =>
+    set((state) => {
+      const updated = state.notifications.map((n) =>
         n.id === id ? { ...n, read: true } : n
-      ),
-      unreadCount: Math.max(0, state.unreadCount - 1),
-    })),
+      );
+      const newCount = updated.filter((n) => !n.read).length;
+      return { notifications: updated, unreadCount: newCount };
+    }),
+    
+  markOneUnread: (id) =>
+    set((state) => {
+      const updated = state.notifications.map((n) =>
+        n.id === id ? { ...n, read: false } : n
+      );
+      const newCount = updated.filter((n) => !n.read).length;
+      return { notifications: updated, unreadCount: newCount };
+    }),
 }));
