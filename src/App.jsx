@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [currentPage, setCurrentPage] = useState("users");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   useFakeNotification();
@@ -38,26 +39,63 @@ function App() {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <div className="flex bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-        <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        <main className="flex-1 p-6">
+      <div className="flex bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
+        {/* Mobile Sidebar Overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        <Sidebar
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
+
+        <main className="flex-1 p-3 md:p-6 w-full lg:w-auto">
           <header className="mb-4">
             <div className="flex justify-between items-center border-b pb-4">
-              <h1 className="text-2xl font-bold">{getPageTitle()}</h1>
+              {/* Mobile Menu Button */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors lg:hidden"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </button>
+                <h1 className="text-xl md:text-2xl font-bold">
+                  {getPageTitle()}
+                </h1>
+              </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 md:gap-4">
                 <button
                   onClick={toggleDarkMode}
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 >
                   {darkMode ? (
                     <Sun
-                      size={20}
+                      size={18}
                       className="text-gray-600 dark:text-gray-300"
                     />
                   ) : (
                     <Moon
-                      size={20}
+                      size={18}
                       className="text-gray-600 dark:text-gray-300"
                     />
                   )}

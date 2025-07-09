@@ -75,3 +75,47 @@ body {
 .light-controls button svg {
   fill: #000000 !important;
 }
+
+/* Mobile responsive utilities */
+@media (max-width: 768px) {
+  .react-flow .react-flow__controls {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .react-flow .react-flow__controls button {
+    padding: 6px;
+  }
+  
+  .react-flow .react-flow__minimap {
+    display: none;
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 640px) {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mobile table improvements */
+@media (max-width: 768px) {
+  .table-mobile-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Mobile notification dropdown */
+@media (max-width: 640px) {
+  .notification-dropdown {
+    position: fixed !important;
+    top: 60px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    max-height: calc(100vh - 80px) !important;
+  }
+}

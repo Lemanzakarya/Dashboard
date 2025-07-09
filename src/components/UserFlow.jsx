@@ -97,18 +97,21 @@ export default function UserFlow() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-3 md:p-4">
       <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center gap-2">
         <span>🔄</span> Dashboard Process Flow
       </h2>
 
-      <div className="h-[350px] bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-600">
+      <div className="h-[250px] sm:h-[300px] md:h-[350px] bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-600">
         <ReactFlow
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           fitView
+          minZoom={0.5}
+          maxZoom={2}
+          defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
         >
           <Background
             color={isDarkMode ? "#475569" : "#94a3b8"}
@@ -130,14 +133,15 @@ export default function UserFlow() {
 
           <MiniMap
             style={{
-              width: 120,
-              height: 80,
+              width: window.innerWidth < 768 ? 80 : 120,
+              height: window.innerWidth < 768 ? 60 : 80,
               background: isDarkMode ? "#374151" : "#ffffff",
               border: `1px solid ${isDarkMode ? "#4b5563" : "#e5e7eb"}`,
               borderRadius: "6px",
             }}
             maskColor={isDarkMode ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.1)"}
             nodeColor={isDarkMode ? "#6b7280" : "#9ca3af"}
+            className="hidden sm:block"
           />
         </ReactFlow>
       </div>

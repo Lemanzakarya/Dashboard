@@ -60,9 +60,9 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 z-50">
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+        <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 z-50 max-h-[80vh] flex flex-col">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
               Notifications
             </h3>
             <div className="flex items-center gap-2">
@@ -72,7 +72,7 @@ export default function NotificationBell() {
                   className="text-xs text-slate-600 dark:text-slate-400 hover:underline flex items-center gap-1 hover:text-slate-800 dark:hover:text-slate-200"
                 >
                   <CheckCheck size={14} />
-                  Mark all as read
+                  <span className="hidden sm:inline">Mark all as read</span>
                 </button>
               )}
               <button
@@ -84,7 +84,7 @@ export default function NotificationBell() {
             </div>
           </div>
 
-          <div className="max-h-96 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-6 text-center text-gray-500 dark:text-gray-400">
                 <Bell className="mx-auto mb-2 h-8 w-8 opacity-50" />
@@ -101,7 +101,7 @@ export default function NotificationBell() {
                         : "bg-white dark:bg-gray-800"
                     }`}
                   >
-                    <div className="p-4 flex items-start gap-3">
+                    <div className="p-3 sm:p-4 flex items-start gap-3">
                       <div
                         className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
                           !notification.read

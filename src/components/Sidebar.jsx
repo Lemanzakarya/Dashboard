@@ -1,13 +1,40 @@
-import { Users, Settings, GitBranch } from "lucide-react";
+import { Users, Settings, GitBranch, X } from "lucide-react";
 
-const Sidebar = ({ currentPage, setCurrentPage }) => {
+const Sidebar = ({
+  currentPage,
+  setCurrentPage,
+  sidebarOpen,
+  setSidebarOpen,
+}) => {
+  const handleNavClick = (page) => {
+    setCurrentPage(page);
+    setSidebarOpen(false); // Close sidebar on mobile after selection
+  };
+
   return (
-    <aside className="w-64 h-screen bg-[#1E293B] text-white flex flex-col justify-between sticky top-0">
+    <aside
+      className={`
+      fixed lg:sticky top-0 left-0 z-50 
+      w-64 h-screen bg-[#1E293B] text-white 
+      flex flex-col justify-between
+      transform transition-transform duration-300 ease-in-out
+      ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+    `}
+    >
       <div>
-        <div className="p-6 text-xl font-bold">Dashboard</div>
+        <div className="p-6 text-xl font-bold flex items-center justify-between">
+          <span>Dashboard</span>
+          {/* Mobile Close Button */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden p-1 rounded hover:bg-slate-700 transition-colors"
+          >
+            <X size={20} />
+          </button>
+        </div>
         <nav className="flex flex-col px-4 space-y-1">
           <button
-            onClick={() => setCurrentPage("users")}
+            onClick={() => handleNavClick("users")}
             className={`flex items-center gap-2 p-2 rounded hover:bg-slate-700 text-left transition-all duration-200 ${
               currentPage === "users" ? "bg-slate-500/20 text-slate-300" : ""
             }`}
@@ -16,7 +43,7 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
           </button>
 
           <button
-            onClick={() => setCurrentPage("flow")}
+            onClick={() => handleNavClick("flow")}
             className={`flex items-center gap-2 p-2 rounded hover:bg-slate-700 text-left transition-all duration-200 ${
               currentPage === "flow" ? "bg-slate-500/20 text-slate-300" : ""
             }`}
