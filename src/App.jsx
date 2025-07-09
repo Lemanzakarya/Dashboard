@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Users, GitBranch } from "lucide-react";
 import UserListPage from "./pages/UserListPage";
 import FlowPage from "./pages/FlowPage";
 import Sidebar from "./components/Sidebar";
@@ -78,9 +78,33 @@ function App() {
                     />
                   </svg>
                 </button>
-                <h1 className="text-xl md:text-2xl font-bold">
-                  {getPageTitle()}
-                </h1>
+                <div className="flex items-center gap-3">
+                  {currentPage === "users" && (
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                      <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                  )}
+                  {currentPage === "flow" && (
+                    <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                      <GitBranch className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    </div>
+                  )}
+                  <div>
+                    <h1 className="text-lg md:text-xl font-semibold">
+                      {getPageTitle()}
+                    </h1>
+                    {currentPage === "users" && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Manage and organize your users effectively
+                      </p>
+                    )}
+                    {currentPage === "flow" && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Visualize and manage your process workflows
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center gap-2 md:gap-4">
