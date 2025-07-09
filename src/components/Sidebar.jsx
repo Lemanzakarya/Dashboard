@@ -11,12 +11,12 @@ const Sidebar = ({ darkMode, toggleDarkMode }) => {
         >
           <Users size={18} /> Users
         </a>
-        {/* Diğer menüler buraya eklenebilir */}
+
       </nav>
-      
+
       <div className="px-4 py-2 mt-4 border-t border-slate-600">
-        <button 
-          onClick={toggleDarkMode} 
+        <button
+          onClick={toggleDarkMode}
           className="flex items-center gap-2 p-2 rounded hover:bg-slate-700 w-full text-left"
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}

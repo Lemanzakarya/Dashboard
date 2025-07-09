@@ -4,6 +4,7 @@ import axios from "axios";
 export const useUsers = () => {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
+  const [sortField, setSortField] = useState("firstName");
   const [sortAsc, setSortAsc] = useState(true);
   const [page, setPage] = useState(0);
   const itemsPerPage = 5;
@@ -14,18 +15,30 @@ export const useUsers = () => {
       .then((res) => setUsers(res.data.users));
   }, []);
 
-const filtered = users.filter((user) =>
-  `${user.firstName} ${user.lastName} ${user.email}`
-    .toLowerCase()
-    .includes(query.toLowerCase())
-);
+  const filtered = users.filter((user) => {
+    const searchText =
+      `${user.firstName} ${user.lastName} ${user.email}`.toLowerCase();
+    return searchText.includes(query.toLowerCase());
+  });
 
+  const sorted = [...filtered].sort((a, b) => {
+    let aValue, bValue;
 
-  const sorted = [...filtered].sort((a, b) =>
-    sortAsc
-      ? a.firstName.localeCompare(b.firstName)
-      : b.firstName.localeCompare(a.firstName)
-  );
+    if (sortField === "firstName") {
+      aValue = a.firstName;
+      bValue = b.firstName;
+    } else if (sortField === "email") {
+      aValue = a.email;
+      bValue = b.email;
+    } else if (sortField === "company") {
+      aValue = a.company?.title || "";
+      bValue = b.company?.title || "";
+    }
+
+    return sortAsc
+      ? aValue.localeCompare(bValue)
+      : bValue.localeCompare(aValue);
+  });
 
   const paginated = sorted.slice(
     page * itemsPerPage,
@@ -37,12 +50,13 @@ const filtered = users.filter((user) =>
     setPage(0);
   };
 
-  const handleSort = () => {
-    setSortAsc(!sortAsc);
-  };
-
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortAsc(!sortAsc);
+    } else {
+      setSortField(field);
+      setSortAsc(true);
+    }
   };
 
   const nextPage = () => {
@@ -58,12 +72,12 @@ const filtered = users.filter((user) =>
   return {
     users: paginated,
     query,
+    sortField,
     sortAsc,
     page,
     totalPages: Math.ceil(filtered.length / itemsPerPage),
     handleSearch,
     handleSort,
-    handlePageChange,
     nextPage,
     prevPage,
   };

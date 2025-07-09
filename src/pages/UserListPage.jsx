@@ -1,4 +1,4 @@
-import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, ArrowUpDown } from "lucide-react";
 import { useUsers } from "../hooks/useUsers";
 import UserTable from "../components/UserTable";
 
@@ -6,6 +6,7 @@ export default function UserListPage() {
   const {
     users,
     query,
+    sortField,
     sortAsc,
     page,
     totalPages,
@@ -17,23 +18,59 @@ export default function UserListPage() {
 
   return (
     <div className="p-6">
-      {/* Header with Search and Actions */}
-      <div className="flex justify-between items-center mb-4">
-        <input
-          type="text"
-          placeholder="Search user..."
-          value={query}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="px-4 py-2 border rounded w-1/2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
-        />
-        <div>
-          <button
-            onClick={handleSort}
-            className="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <Filter size={18} />
-            {sortAsc ? "A-Z" : "Z-A"}
-          </button>
+      {/* Search and Sort Section */}
+      <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+          {/* Search */}
+          <div className="relative flex-shrink-0">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search by name or email..."
+              value={query}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="w-full md:w-80 pl-10 pr-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Sort Buttons */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => handleSort("firstName")}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                sortField === "firstName"
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-orange-100 dark:hover:bg-gray-600"
+              }`}
+            >
+              <ArrowUpDown size={14} />
+              Name {sortField === "firstName" && (sortAsc ? "↑" : "↓")}
+            </button>
+
+            <button
+              onClick={() => handleSort("email")}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                sortField === "email"
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-orange-100 dark:hover:bg-gray-600"
+              }`}
+            >
+              <ArrowUpDown size={14} />
+              Email {sortField === "email" && (sortAsc ? "↑" : "↓")}
+            </button>
+
+            <button
+              onClick={() => handleSort("Designation")}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                sortField === "Designation"
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-orange-100 dark:hover:bg-gray-600"
+              }`}
+            >
+              <ArrowUpDown size={14} />
+              Designation {sortField === "Designation" && (sortAsc ? "↑" : "↓")}
+            </button>
+          </div>
         </div>
       </div>
 

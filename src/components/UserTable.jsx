@@ -2,13 +2,12 @@ const UserTable = ({ users }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
       <table className="min-w-full text-sm">
-        <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+        <thead className="bg-[#1E293B] text-white">
           <tr>
-            <th className="text-left px-6 py-3">Name</th>
-            <th className="text-left px-6 py-3">Designation</th>
-            <th className="text-left px-6 py-3">Email</th>
-            <th className="text-left px-6 py-3">Phone No.</th>
-            <th className="text-left px-6 py-3">Status</th>
+            <th className="text-left px-6 py-3 font-medium">Name</th>
+            <th className="text-left px-6 py-3 font-medium">Designation</th>
+            <th className="text-left px-6 py-3 font-medium">Email</th>
+            <th className="text-left px-6 py-3 font-medium">Phone No.</th>
           </tr>
         </thead>
         <tbody>
@@ -23,11 +22,6 @@ const UserTable = ({ users }) => {
               <td className="px-6 py-3">{user.company?.title || "—"}</td>
               <td className="px-6 py-3">{user.email}</td>
               <td className="px-6 py-3">{user.phone}</td>
-              <td className="px-6 py-3">
-                <span className="inline-block px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
-                  Active
-                </span>
-              </td>
             </tr>
           ))}
         </tbody>
