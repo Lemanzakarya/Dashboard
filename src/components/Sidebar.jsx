@@ -8,7 +8,7 @@ const Sidebar = ({
 }) => {
   const handleNavClick = (page) => {
     setCurrentPage(page);
-    setSidebarOpen(false); // Close sidebar on mobile after selection
+    setSidebarOpen(false); 
   };
 
   return (
@@ -53,7 +53,6 @@ const Sidebar = ({
         </nav>
       </div>
 
-      {/* Alt kısımda şirket bilgisi */}
       <div className="p-4 border-t border-slate-600">
         <div className="text-sm text-slate-400 text-left">
           Antalya Bilişim Teknoloji
