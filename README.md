@@ -28,6 +28,3 @@ Bu proje, kullanıcı listesinin görüntülenmesi, filtrelenmesi, sıralanması
 * **Zustand**: Global state yönetimi için basit ve verimli bir alternatif.
 * **React Flow**: Akış şeması ve süreç görselleştirmeleri için.
 
-## Kendi Değerlendirmem
-
-Projede genel olarak kullanıcı listesi bileşeni, filtreleme ve sıralama mantığı kolayca uygulanabilir oldu. Özellikle Zustand kullanımı sayesinde global state yönetimi sade ve okunabilir bir yapıya kavuştu. React Flow ile süreç görselleştirme kısmı başlangıçta biraz karmaşık görünse de, sade bir yapı kurularak dark mode desteğiyle birlikte uyumlu bir sonuç elde edildi. En çok zorlandığım kısım, bildirim sistemini gerçekçi şekilde taklit etmek ve okunmamış-okunmuş mantığını kullanıcı dostu hale getirmekti. Bunun dışında tasarım tarafında dark mode uyumu ve responsivity için birkaç ince ayar yapılması gerekti. Sonuç olarak, istenen tüm özellikleri kapsayan ve okunabilirliği yüksek, fonksiyonel bir dashboard ortaya çıktı.
